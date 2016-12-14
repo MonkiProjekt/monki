@@ -21,7 +21,7 @@ $seekuu = date('m');
     }
 $eelminekuusrc = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=l3upthkhmrvn5927cjvl4d5r6s%40group.calendar.google.com&amp;color=%23711616&amp;ctz=Europe%2FTallinn&dates=".$eelmineaasta.$eelminekuu."01%2F".$eelmineaasta.$eelminekuu."20";
 $j2rgminekuu = date('m', strtotime('+1 month'));
-$j2rgminekuusrc = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=l3upthkhmrvn5927cjvl4d5r6s%40group.calendar.google.com&amp;color=%23711616&amp;ctz=Europe%2FTallinn&dates=".$j2rgmineaasta.$j2rgminekuu."01%2F".$j2rgmineaasta.$j2rgminekuu."20";
+$j2rgminekuusrc = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=50ejcuv6grvr17lndu5stgeslk%40group.calendar.google.com&amp;color=%23711616&amp;src=3j64mhqpbjiht37qb7jtotfnjc%40group.calendar.google.com&amp;color=%236B3304&amp;src=1u5fit2lhos80q2p1m95ksj8n8%40group.calendar.google.com&amp;color=%23AB8B00&amp;src=mk213015r75nubu865187gkkr8%40group.calendar.google.com&amp;color=%232F6309&amp;src=eih1mrannutedu2qi21e1l17t4%40group.calendar.google.com&amp;color=%23182C57&amp;src=4vcuk17eks80l3iqfjijggdjho%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=Europe%2FTallinn&dates=".$j2rgmineaasta.$j2rgminekuu."01%2F".$j2rgmineaasta.$j2rgminekuu."20";
 
 
 
@@ -51,7 +51,7 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
     <meta name="author" content="">
 
     <title>Monki Management v5.0</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />';
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <link rel="icon" href="favicon.png">
 
     <!-- Bootstrap Core CSS -->
@@ -82,12 +82,16 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
 	<style type="text/css">
 	#meilid, #asjad{
         max-height: 800px;
-        overflow: scroll 
+        overflow: scroll;
+        overflow-y: auto;
+        overflow-x: auto;
     }
 
     #tulemid{
         max-height: 400px;
         overflow:scroll;
+        overflow-y: auto;
+        overflow-x: auto;
     }
 
 	</style>
@@ -107,7 +111,7 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Monki Management v5.0</a><img src="refresh.png" onclick="esimene();teine();" height="40px" style="margin-left: 40px; cursor: pointer;">
+                <a class="navbar-brand" href="index.html">Monki Management v5.0</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -131,7 +135,7 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input id="otsing" onkeydown="otsi();" type="text" class="form-control" placeholder="Search...">
+                                <input id="otsing" onkeydown="otsi();" type="text" class="form-control" placeholder="Otsi...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" onclick="otsi();">
                                     <i class="fa fa-search"></i>
@@ -155,9 +159,27 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
                                         Tehtud
                                     </option> 
                                 </select>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-list-alt fa-fw"></i> Töölaud</a>
+                            
+                            <!--
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Kuskohast
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+
+                                        <li style="border:none; background-color:none;"><a href="#">Uued</a>
+                                        </li>
+                                        <li style="border:none"><a href="#">Määratud</a>
+                                        </li>
+                                        <li style="border:none"><a href="#">Tellimisel</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li style="border:none"><a href="#">Kõigist</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                          -->
                         </li>
 
 
@@ -167,8 +189,12 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
 
 
 ?>
-                    <!-- /. siia tuleb igasugust asju mida näeb ainult admin: kasutajate registreerimine, muutmine, statistika jpm -->
+                         <!-- /. siia tuleb igasugust asju mida näeb ainult admin: kasutajate registreerimine, muutmine, statistika jpm -->
 
+                        <li>
+                            <a href="#"><i class="fa fa-list-alt fa-fw"></i> Töölaud</a>
+                        </li>
+                   
                         <li>
                             <a href="/statistika"><i class="fa fa-bar-chart-o fa-fw"></i> Statistika</a>
                         </li>
@@ -220,6 +246,7 @@ $leiaOmanik = mysqli_query($con,"SELECT * FROM users WHERE uid='$uid'") or die(m
 
         <div id="page-wrapper">
             <div class="row">
+            <h1> </h1>
                 <div class="col-lg-12" id="tulemid">
                     <div class="panel panel-default">
                         <div class="panel-heading">

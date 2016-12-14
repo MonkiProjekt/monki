@@ -29,7 +29,7 @@ if ($message_count > 0) {
 		$stamp = time().rand(0,999);
 		$name = $stamp.".eml";
 		
-		echo "Laen alla meili numbriga $i";		
+		echo "\n Laen alla meili numbriga $i \n";		
 		//SALVESTAME MEILI KATALOOGI
 		file_put_contents("./meilid/".$name, $headers . "\n" . imap_body($mbox, $i)) or die();
 				
@@ -66,6 +66,8 @@ if ($message_count > 0) {
 				
 		$txt = "INSERT INTO emails (id, stamp, fromaddress, subject, kuup, body, assigned, state) VALUES ('$stamp',$aeg, '$fromaddress', '$subject', '$date', '$body', '0', '0')";
 
+		echo "laetud alla meil - $fromaddress \n";
+
 		$query = mysqli_query($con,$txt) or die(mysqli_error($con));
 		imap_delete($mbox,$i);
 		imap_expunge($mbox);
@@ -73,5 +75,5 @@ if ($message_count > 0) {
 	}
 }
 imap_close($mbox);
-echo "Meilid edukalt laetud \n";
+echo "Emaile tõmmatud: $message_count \n";
 ?>
